@@ -48,9 +48,28 @@ for i = 1:length(t)
 end
 
 
-plot(t, m, t,pam_natural, t, pam_instantaneo)
+figure;
+
+
+figure;
+
+subplot(3,1,1)
+plot(t, m)
 xlabel('Tiempo')
 ylabel('Amplitud de m(t)')
-title('Naranjo: PAM natural, Amarillo: PAM instantaneo, Azul: Señal original')
+title('Señal Original m(t)')
 grid on
 
+subplot(3,1,2)
+plot(t, pam_natural)
+xlabel('Tiempo')
+ylabel('tren de pulso')
+title('Señal PAM')
+grid on
+
+subplot(3,1,3)
+plot(t,pam_instantaneo)
+xlabel('tiempo')
+ylabel('amplitud')
+title('Señal con muestreo natural')
+grid on
