@@ -50,9 +50,6 @@ end
 
 figure;
 
-
-figure;
-
 subplot(3,1,1)
 plot(t, m)
 xlabel('Tiempo')

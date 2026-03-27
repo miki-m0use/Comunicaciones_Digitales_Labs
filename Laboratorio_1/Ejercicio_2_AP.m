@@ -28,21 +28,7 @@ p = (square(2*pi*Fs*t, 100*d) + 1)/2 %el 100d se supone que es el ciclo de traba
 M = p.*m
 
 
-subplot(3,1,1)
-plot(t, m)
-xlabel('Tiempo')
-ylabel('Amplitud de m(t)')
-title('Señal Original m(t)')
-grid on
 
-subplot(3,1,2)
-plot(t, p)
-xlabel('Tiempo')
-ylabel('tren de pulso')
-title('Señal PAM')
-grid on
-
-subplot(3,1,3)
 plot(t,M)
 xlabel('tiempo')
 ylabel('amplitud')

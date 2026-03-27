@@ -53,5 +53,3 @@ xlabel('Tiempo')
 ylabel('Amplitud de m(t)')
 title('Señal Original m(t)')
 grid on
-
-

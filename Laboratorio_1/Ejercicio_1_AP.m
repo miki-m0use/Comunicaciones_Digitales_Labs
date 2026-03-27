@@ -15,8 +15,28 @@ t = 0:Ms:0.01%vector del tiempo de un segundo, tiempos mas peuqeños hace mejor 
 A = 1
 m = A*sin(2*pi*fc*t)
 
-plot(t,m) %graficamos la señal
-xlabel('tiempo') % nombre del eje horizontal
-ylabel('amplitud') %nombre del eje vertical
-grid on %mostramos la señal
+
+Fs = 10000
+Ts = 1/Fs
+
+d = 0.5 %donde tau es el ancho del pulso
+tau = d*Ts % lo puse mejor asi porque si no es medio webeo poner un tau manual, es mal facil poner el "d"
+
+%creado esto podemos crear el tren de pulsos
+
+p = (square(2*pi*Fs*t, 100*d) + 1)/2
+
+subplot(2,1,1)
+plot(t, m)
+xlabel('Tiempo')
+ylabel('Amplitud de m(t)')
+title('Señal Original m(t)')
+grid on
+
+subplot(2,1,2)
+plot(t, p)
+xlabel('Tiempo')
+ylabel('amplitud')
+title('Señal tren de pulso cuadrado')
+grid on
 

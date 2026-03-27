@@ -72,21 +72,21 @@ Yinst_pos = abs(Y_inst(mitad));
 subplot(3,1,1)
 plot(f_pos, Ym_pos, 'LineWidth', 1.2); hold on;
 xlabel('Tiempo')
-ylabel('Amplitud de m(t)')
+ylabel('Frecuencia ')
 title('Señal Original m(t)')
 grid on
 
 subplot(3,1,2)
 plot(f_pos, Ynat_pos, 'LineWidth', 1.2);
 xlabel('Tiempo')
-ylabel('tren de pulso')
+ylabel('Frecuencia')
 title('Señal PAM natural')
 grid on
 
 subplot(3,1,3)
 plot(f_pos, Yinst_pos, 'LineWidth', 1.2);
 xlabel('tiempo')
-ylabel('amplitud')
+ylabel('Frecuencia')
 title('Señal PAM instantanea')
 grid on
 
