@@ -20,7 +20,7 @@ d = 0.5; % ciclo de trabajo
 tau = d*Ts;
 
 % Tren de pulsos
-p = (mod(t, Ts) < d*Ts);
+p = (square(2*pi*Fs*t, 100*d) + 1)/2;
 
 % PAM natural
 pam_natural = p .* m;
