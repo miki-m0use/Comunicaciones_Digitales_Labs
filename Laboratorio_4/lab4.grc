@@ -33,30 +33,6 @@ options:
     state: enabled
 
 blocks:
-- name: BPSK
-  id: variable
-  parameters:
-    comment: ''
-    value: '[1, -1]'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [296, 12.0]
-    rotation: 0
-    state: enabled
-- name: QPSK
-  id: variable
-  parameters:
-    comment: ''
-    value: '[1+1j, -1+1j,  1-1j, -1-1j]'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [504, 12.0]
-    rotation: 0
-    state: enabled
 - name: const_0
   id: variable_constellation
   parameters:
@@ -74,7 +50,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 84.0]
+    coordinate: [296, 12.0]
     rotation: 0
     state: true
 - name: const_1
@@ -94,7 +70,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [504, 84.0]
+    coordinate: [464, 12.0]
     rotation: 0
     state: true
 - name: const_2
@@ -114,7 +90,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 84.0]
+    coordinate: [632, 12.0]
     rotation: 0
     state: true
 - name: noise_volt
@@ -126,29 +102,16 @@ blocks:
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
-    start: '0'
+    start: '0.01'
     step: '0.01'
     stop: '1'
-    value: '0.01'
+    value: '0.6302'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 12.0]
-    rotation: 0
-    state: enabled
-- name: ocho_PSK
-  id: variable
-  parameters:
-    comment: ''
-    value: '[1+0j, 0.707+0.707j, 0+1j, -0.707+0.707j, -1+0j, -0.707-0.707j, 0-1j,
-      0.707-0.707j]'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [712, 12.0]
+    coordinate: [792, 12.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -168,7 +131,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    amp: '0.1'
+    amp: noise_volt
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -179,7 +142,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 788.0]
+    coordinate: [488, 844.0]
     rotation: 0
     state: enabled
 - name: analog_noise_source_x_0_0
@@ -187,7 +150,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    amp: '0.1'
+    amp: noise_volt
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -198,7 +161,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 348.0]
+    coordinate: [128, 468.0]
     rotation: 0
     state: enabled
 - name: analog_noise_source_x_0_1
@@ -206,7 +169,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    amp: '0.1'
+    amp: noise_volt
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -230,7 +193,7 @@ blocks:
     maxoutbuf: '0'
     min: '0'
     minoutbuf: '0'
-    num_samps: '32000'
+    num_samps: '10000'
     repeat: 'True'
     type: byte
   states:
@@ -313,7 +276,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 232.0]
+    coordinate: [592, 232.0]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_0_1
@@ -332,6 +295,70 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [664, 1152.0]
+    rotation: 0
+    state: enabled
+- name: blocks_pack_k_bits_bb_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1472, 756.0]
+    rotation: 0
+    state: enabled
+- name: blocks_pack_k_bits_bb_0_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1160, 884.0]
+    rotation: 0
+    state: enabled
+- name: blocks_pack_k_bits_bb_0_0_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1480, 1220.0]
+    rotation: 0
+    state: enabled
+- name: blocks_pack_k_bits_bb_0_0_1
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [984, 1316.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle2_0
@@ -373,7 +400,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [784, 236.0]
+    coordinate: [768, 236.0]
     rotation: 0
     state: true
 - name: blocks_throttle2_0_1
@@ -409,7 +436,7 @@ blocks:
     minoutbuf: '0'
     num_ports: '1'
     out_type: complex
-    symbol_table: QPSK
+    symbol_table: const_1.points()
   states:
     bus_sink: false
     bus_source: false
@@ -429,12 +456,12 @@ blocks:
     minoutbuf: '0'
     num_ports: '1'
     out_type: complex
-    symbol_table: BPSK
+    symbol_table: const_0.points()
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 216.0]
+    coordinate: [344, 216.0]
     rotation: 0
     state: enabled
 - name: digital_chunks_to_symbols_xx_0_1
@@ -449,7 +476,7 @@ blocks:
     minoutbuf: '0'
     num_ports: '1'
     out_type: complex
-    symbol_table: ocho_PSK
+    symbol_table: const_2.points()
   states:
     bus_sink: false
     bus_source: false
@@ -470,7 +497,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1336, 708.0]
+    coordinate: [1192, 708.0]
     rotation: 0
     state: enabled
 - name: digital_constellation_decoder_cb_0_0
@@ -486,7 +513,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1312, 244.0]
+    coordinate: [968, 244.0]
     rotation: 0
     state: enabled
 - name: digital_constellation_decoder_cb_0_1
@@ -502,7 +529,61 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1336, 1164.0]
+    coordinate: [1256, 1164.0]
+    rotation: 0
+    state: enabled
+- name: fec_ber_bf_0
+  id: fec_ber_bf
+  parameters:
+    affinity: ''
+    alias: ''
+    berlimit: '-7.0'
+    berminerrors: '100'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    test_mode: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1272, 408.0]
+    rotation: 0
+    state: enabled
+- name: fec_ber_bf_0_0
+  id: fec_ber_bf
+  parameters:
+    affinity: ''
+    alias: ''
+    berlimit: '-7.0'
+    berminerrors: '100'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    test_mode: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1456, 880.0]
+    rotation: 0
+    state: enabled
+- name: fec_ber_bf_0_0_0
+  id: fec_ber_bf
+  parameters:
+    affinity: ''
+    alias: ''
+    berlimit: '-7.0'
+    berminerrors: '100'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    test_mode: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1328, 1288.0]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0
@@ -686,7 +767,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 356.0]
+    coordinate: [680, 412.0]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0_1
@@ -781,69 +862,6 @@ blocks:
     coordinate: [648, 1300.0]
     rotation: 0
     state: enabled
-- name: qtgui_number_sink_0
-  id: qtgui_number_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    autoscale: 'False'
-    avg: '0'
-    color1: ("black", "black")
-    color10: ("black", "black")
-    color2: ("black", "black")
-    color3: ("black", "black")
-    color4: ("black", "black")
-    color5: ("black", "black")
-    color6: ("black", "black")
-    color7: ("black", "black")
-    color8: ("black", "black")
-    color9: ("black", "black")
-    comment: ''
-    factor1: '1'
-    factor10: '1'
-    factor2: '1'
-    factor3: '1'
-    factor4: '1'
-    factor5: '1'
-    factor6: '1'
-    factor7: '1'
-    factor8: '1'
-    factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_HORIZ
-    gui_hint: ''
-    label1: ''
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    max: '1'
-    min: '-1'
-    name: '""'
-    nconnections: '1'
-    type: byte
-    unit1: ''
-    unit10: ''
-    unit2: ''
-    unit3: ''
-    unit4: ''
-    unit5: ''
-    unit6: ''
-    unit7: ''
-    unit8: ''
-    unit9: ''
-    update_time: '0.10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1784, 804.0]
-    rotation: 0
-    state: enabled
 - name: qtgui_number_sink_0_0
   id: qtgui_number_sink
   parameters:
@@ -872,7 +890,7 @@ blocks:
     factor7: '1'
     factor8: '1'
     factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_HORIZ
+    graph_type: qtgui.NUM_GRAPH_VERT
     gui_hint: ''
     label1: ''
     label10: ''
@@ -886,9 +904,9 @@ blocks:
     label9: ''
     max: '1'
     min: '-1'
-    name: '""'
+    name: '"BER QPSK"'
     nconnections: '1'
-    type: byte
+    type: float
     unit1: ''
     unit10: ''
     unit2: ''
@@ -904,10 +922,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1760, 340.0]
+    coordinate: [1784, 860.0]
     rotation: 0
     state: enabled
-- name: qtgui_number_sink_0_1
+- name: qtgui_number_sink_0_0_0
   id: qtgui_number_sink
   parameters:
     affinity: ''
@@ -935,7 +953,7 @@ blocks:
     factor7: '1'
     factor8: '1'
     factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_HORIZ
+    graph_type: qtgui.NUM_GRAPH_VERT
     gui_hint: ''
     label1: ''
     label10: ''
@@ -949,9 +967,9 @@ blocks:
     label9: ''
     max: '1'
     min: '-1'
-    name: '""'
+    name: '"BER 8-PSK"'
     nconnections: '1'
-    type: byte
+    type: float
     unit1: ''
     unit10: ''
     unit2: ''
@@ -967,46 +985,70 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1784, 1268.0]
+    coordinate: [1688, 1276.0]
     rotation: 0
     state: enabled
-- name: virtual_sink_0
-  id: virtual_sink
+- name: qtgui_number_sink_1
+  id: qtgui_number_sink
   parameters:
+    affinity: ''
     alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
     comment: ''
-    stream_id: deco_1
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_VERT
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '"BER BPSK"'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1816, 628.0]
-    rotation: 0
-    state: enabled
-- name: virtual_sink_0_0
-  id: virtual_sink
-  parameters:
-    alias: ''
-    comment: ''
-    stream_id: deco_0
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1792, 172.0]
-    rotation: 0
-    state: enabled
-- name: virtual_sink_0_1
-  id: virtual_sink
-  parameters:
-    alias: ''
-    comment: ''
-    stream_id: deco_2
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1816, 1084.0]
+    coordinate: [1944, 388.0]
     rotation: 0
     state: enabled
 
@@ -1015,26 +1057,33 @@ connections:
 - [analog_noise_source_x_0_0, '0', blocks_add_xx_0_0, '1']
 - [analog_noise_source_x_0_1, '0', blocks_add_xx_0_1, '1']
 - [analog_random_source_x_0, '0', digital_chunks_to_symbols_xx_0_0, '0']
+- [analog_random_source_x_0, '0', fec_ber_bf_0, '0']
+- [analog_random_source_x_0_0, '0', blocks_pack_k_bits_bb_0_0, '0']
 - [analog_random_source_x_0_0, '0', digital_chunks_to_symbols_xx_0, '0']
+- [analog_random_source_x_0_1, '0', blocks_pack_k_bits_bb_0_0_1, '0']
 - [analog_random_source_x_0_1, '0', digital_chunks_to_symbols_xx_0_1, '0']
 - [blocks_add_xx_0, '0', blocks_throttle2_0, '0']
 - [blocks_add_xx_0_0, '0', blocks_throttle2_0_0, '0']
+- [blocks_add_xx_0_0, '0', qtgui_const_sink_x_0_0, '0']
 - [blocks_add_xx_0_1, '0', blocks_throttle2_0_1, '0']
+- [blocks_pack_k_bits_bb_0, '0', fec_ber_bf_0_0, '1']
+- [blocks_pack_k_bits_bb_0_0, '0', fec_ber_bf_0_0, '0']
+- [blocks_pack_k_bits_bb_0_0_0, '0', fec_ber_bf_0_0_0, '1']
+- [blocks_pack_k_bits_bb_0_0_1, '0', fec_ber_bf_0_0_0, '0']
 - [blocks_throttle2_0, '0', digital_constellation_decoder_cb_0, '0']
 - [blocks_throttle2_0, '0', qtgui_const_sink_x_0, '0']
 - [blocks_throttle2_0_0, '0', digital_constellation_decoder_cb_0_0, '0']
-- [blocks_throttle2_0_0, '0', qtgui_const_sink_x_0_0, '0']
 - [blocks_throttle2_0_1, '0', digital_constellation_decoder_cb_0_1, '0']
 - [blocks_throttle2_0_1, '0', qtgui_const_sink_x_0_1, '0']
 - [digital_chunks_to_symbols_xx_0, '0', blocks_add_xx_0, '0']
 - [digital_chunks_to_symbols_xx_0_0, '0', blocks_add_xx_0_0, '0']
 - [digital_chunks_to_symbols_xx_0_1, '0', blocks_add_xx_0_1, '0']
-- [digital_constellation_decoder_cb_0, '0', qtgui_number_sink_0, '0']
-- [digital_constellation_decoder_cb_0, '0', virtual_sink_0, '0']
-- [digital_constellation_decoder_cb_0_0, '0', qtgui_number_sink_0_0, '0']
-- [digital_constellation_decoder_cb_0_0, '0', virtual_sink_0_0, '0']
-- [digital_constellation_decoder_cb_0_1, '0', qtgui_number_sink_0_1, '0']
-- [digital_constellation_decoder_cb_0_1, '0', virtual_sink_0_1, '0']
+- [digital_constellation_decoder_cb_0, '0', blocks_pack_k_bits_bb_0, '0']
+- [digital_constellation_decoder_cb_0_0, '0', fec_ber_bf_0, '1']
+- [digital_constellation_decoder_cb_0_1, '0', blocks_pack_k_bits_bb_0_0_0, '0']
+- [fec_ber_bf_0, '0', qtgui_number_sink_1, '0']
+- [fec_ber_bf_0_0, '0', qtgui_number_sink_0_0, '0']
+- [fec_ber_bf_0_0_0, '0', qtgui_number_sink_0_0_0, '0']
 
 metadata:
   file_format: 1

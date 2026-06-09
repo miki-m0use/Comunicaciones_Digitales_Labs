@@ -69,8 +69,7 @@ class ochoPSK_lab4(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate_0 = samp_rate_0 = 32000
         self.samp_rate = samp_rate = 32000
-        self.ocho_PSK = ocho_PSK = [1+0j, 0.707+0.707j, 0+1j, -0.707+0.707j, -1+0j, -0.707-0.707j, 0-1j, 0.707-0.707j]
-        self.noise_volt = noise_volt = 0.01
+        self.noise_volt = noise_volt = 0.0
         self.const_2 = const_2 = digital.constellation_8psk().base()
         self.const_2.set_npwr(1.0)
 
@@ -78,6 +77,13 @@ class ochoPSK_lab4(gr.top_block, Qt.QWidget):
         # Blocks
         ##################################################
 
+        self._noise_volt_range = qtgui.Range(0, 1, 0.01, 0.0, 200)
+        self._noise_volt_win = qtgui.RangeWidget(self._noise_volt_range, self.set_noise_volt, "Channel: Noise Voltage", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.top_grid_layout.addWidget(self._noise_volt_win, 0, 0, 1, 1)
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_time_sink_x_0_0 = qtgui.time_sink_f(
             128, #size
             samp_rate, #samp_rate
@@ -233,17 +239,10 @@ class ochoPSK_lab4(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_1_win = sip.wrapinstance(self.qtgui_const_sink_x_0_1.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_const_sink_x_0_1_win)
-        self._noise_volt_range = qtgui.Range(0, 1, 0.01, 0.01, 200)
-        self._noise_volt_win = qtgui.RangeWidget(self._noise_volt_range, self.set_noise_volt, "Channel: Noise Voltage", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_grid_layout.addWidget(self._noise_volt_win, 0, 0, 1, 1)
-        for r in range(0, 1):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
         self.fec_ber_bf_0 = fec.ber_bf(False, 1000, -7.0)
         self.fec_ber_bf_0.set_block_alias("BER")
         self.digital_constellation_decoder_cb_0_1 = digital.constellation_decoder_cb(const_2)
-        self.digital_chunks_to_symbols_xx_0_1 = digital.chunks_to_symbols_bc(ocho_PSK, 1)
+        self.digital_chunks_to_symbols_xx_0_1 = digital.chunks_to_symbols_bc(const_2.points(), 1)
         self.blocks_throttle2_0_1 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
         self.blocks_repeat_0 = blocks.repeat(gr.sizeof_char*1, 16)
         self.blocks_multiply_xx_0_0 = blocks.multiply_vff(1)
@@ -254,7 +253,7 @@ class ochoPSK_lab4(gr.top_block, Qt.QWidget):
         self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, 1000, 1, 0, 0)
         self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, 1000, 1, 0, 0)
         self.analog_random_source_x_0_1 = blocks.vector_source_b(list(map(int, numpy.random.randint(0, 8, 32000))), True)
-        self.analog_noise_source_x_0_1 = analog.noise_source_c(analog.GR_GAUSSIAN, 0.282, 0)
+        self.analog_noise_source_x_0_1 = analog.noise_source_c(analog.GR_GAUSSIAN, noise_volt, 0)
 
 
         ##################################################
@@ -305,18 +304,12 @@ class ochoPSK_lab4(gr.top_block, Qt.QWidget):
         self.blocks_throttle2_0_1.set_sample_rate(self.samp_rate)
         self.qtgui_time_sink_x_0_0.set_samp_rate(self.samp_rate)
 
-    def get_ocho_PSK(self):
-        return self.ocho_PSK
-
-    def set_ocho_PSK(self, ocho_PSK):
-        self.ocho_PSK = ocho_PSK
-        self.digital_chunks_to_symbols_xx_0_1.set_symbol_table(self.ocho_PSK)
-
     def get_noise_volt(self):
         return self.noise_volt
 
     def set_noise_volt(self, noise_volt):
         self.noise_volt = noise_volt
+        self.analog_noise_source_x_0_1.set_amplitude(self.noise_volt)
 
     def get_const_2(self):
         return self.const_2

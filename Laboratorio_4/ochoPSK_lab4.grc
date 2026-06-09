@@ -50,7 +50,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 84.0]
+    coordinate: [416, 20.0]
     rotation: 0
     state: true
 - name: noise_volt
@@ -65,26 +65,13 @@ blocks:
     start: '0'
     step: '0.01'
     stop: '1'
-    value: '0.01'
+    value: '0.0'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [608, 12.0]
-    rotation: 0
-    state: enabled
-- name: ocho_PSK
-  id: variable
-  parameters:
-    comment: ''
-    value: '[1+0j, 0.707+0.707j, 0+1j, -0.707+0.707j, -1+0j, -0.707-0.707j, 0-1j,
-      0.707-0.707j]'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [400, 12.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -116,7 +103,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    amp: '0.282'
+    amp: noise_volt
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -127,7 +114,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 460.0]
+    coordinate: [216, 364.0]
     rotation: 0
     state: enabled
 - name: analog_random_source_x_0_1
@@ -170,7 +157,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 580.0]
+    coordinate: [488, 588.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0_0
@@ -193,7 +180,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 460.0]
+    coordinate: [672, 532.0]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_0_1
@@ -211,7 +198,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 264.0]
+    coordinate: [600, 272.0]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_1
@@ -229,7 +216,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1392, 744.0]
+    coordinate: [1136, 640.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_float_0
@@ -245,7 +232,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 488.0]
+    coordinate: [552, 424.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -263,7 +250,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 800.0]
+    coordinate: [952, 680.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0_0
@@ -281,7 +268,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1208, 696.0]
+    coordinate: [1000, 544.0]
     rotation: 0
     state: enabled
 - name: blocks_repeat_0
@@ -299,7 +286,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 172.0]
+    coordinate: [152, 148.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle2_0_1
@@ -320,7 +307,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 268.0]
+    coordinate: [712, 244.0]
     rotation: 0
     state: true
 - name: digital_chunks_to_symbols_xx_0_1
@@ -335,12 +322,12 @@ blocks:
     minoutbuf: '0'
     num_ports: '1'
     out_type: complex
-    symbol_table: ocho_PSK
+    symbol_table: const_2.points()
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 248.0]
+    coordinate: [376, 200.0]
     rotation: 0
     state: enabled
 - name: digital_constellation_decoder_cb_0_1
@@ -356,7 +343,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1136, 276.0]
+    coordinate: [928, 220.0]
     rotation: 0
     state: enabled
 - name: fec_ber_bf_0
@@ -374,7 +361,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1240, 440.0]
+    coordinate: [1064, 432.0]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0_1
@@ -466,7 +453,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 340.0]
+    coordinate: [872, 316.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_0
@@ -529,7 +516,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1432, 524.0]
+    coordinate: [1248, 420.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_0_1
@@ -592,7 +579,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1392, 252.0]
+    coordinate: [1200, 188.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0_0
@@ -689,7 +676,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1520, 732.0]
+    coordinate: [1272, 644.0]
     rotation: 0
     state: enabled
 

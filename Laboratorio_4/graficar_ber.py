@@ -1,6 +1,10 @@
+from asyncio.windows_events import NULL
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import erfc
+
+import math
 
 # ─────────────────────────────────────────────
 # VALORES MEDIDOS (log10(BER))
@@ -8,11 +12,9 @@ from scipy.special import erfc
 
 ebn0_dB = np.arange(1, 12)
 
-log_ber_BPSK = [-0.928075, -0.919624, -0.913123, -0.908599, -0.905655, -0.904134, -0.903418, -0.903154, -0.903100, -0.903090, -0.903090]
-log_ber_QPSK = [-0.627159, -0.618511, -0.612143, -0.607558, -0.604650,
-                -0.603080, -0.602405, -0.602140, -0.602076, -0.602061,
-                -0.602060]  # reemplaza con tus valores
-log_ber_8PSK = [0,0,0,0,0,0,0,0,0,0,0]  # reemplaza con tus valores
+log_ber_BPSK = [-2.8058, -3.1429,  -3.5461, -4.0230, -4.6981, -5.3604, -6.2084]
+log_ber_QPSK = [-3.1188, -3.34247, -3.5750, -3.9150, -4.4476, -5.1905, -5.6777]  # reemplaza con tus valores
+log_ber_8PSK = [-0.9662, -1.0086, -1.0477 , -1.1180, -1.3318,  -1.5408, -1.6607,  -1.7909, -1.9001, -2.1123, -2.3456 ] #con tus valores
 
 # ─────────────────────────────────────────────
 # CURVAS TEÓRICAS
@@ -40,9 +42,6 @@ x_BPSK, y_BPSK = convertir(log_ber_BPSK)
 x_QPSK, y_QPSK = convertir(log_ber_QPSK)
 x_8PSK, y_8PSK = convertir(log_ber_8PSK)
 
-# ─────────────────────────────────────────────
-# CALCULAR LÍMITES DEL EJE Y AUTOMÁTICAMENTE
-# ─────────────────────────────────────────────
 
 todos_sim = [10**v for vals in [log_ber_BPSK, log_ber_QPSK, log_ber_8PSK]
              for v in vals if v is not None]
@@ -51,14 +50,10 @@ todos_teo = list(ber_teo_BPSK) + list(ber_teo_QPSK) + list(ber_teo_8PSK)
 ymin = min(todos_teo + todos_sim)
 ymax = max(todos_teo + todos_sim)
 
-# Redondear a potencias de 10
-import math
+
 ymin_plot = 10 ** math.floor(math.log10(ymin))
 ymax_plot = 10 ** math.ceil(math.log10(ymax))
 
-# ─────────────────────────────────────────────
-# GRAFICAR
-# ─────────────────────────────────────────────
 
 fig, ax = plt.subplots(figsize=(9, 6))
 

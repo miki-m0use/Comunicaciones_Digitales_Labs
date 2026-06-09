@@ -69,15 +69,21 @@ class BPSK_lab4(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate_0 = samp_rate_0 = 32000
         self.samp_rate = samp_rate = 32000
-        self.noise_volt = noise_volt = 0.01
+        self.noise_volt = noise_volt = 0.6302
         self.const_0 = const_0 = digital.constellation_bpsk().base()
         self.const_0.set_npwr(1.0)
-        self.BPSK = BPSK = [1, -1]
 
         ##################################################
         # Blocks
         ##################################################
 
+        self._noise_volt_range = qtgui.Range(0, 1, 0.01, 0.6302, 200)
+        self._noise_volt_win = qtgui.RangeWidget(self._noise_volt_range, self.set_noise_volt, "Channel: Noise Voltage", "counter_slider", float, QtCore.Qt.Horizontal)
+        self.top_grid_layout.addWidget(self._noise_volt_win, 0, 0, 1, 1)
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_time_sink_x_0_0 = qtgui.time_sink_f(
             128, #size
             samp_rate, #samp_rate
@@ -126,39 +132,6 @@ class BPSK_lab4(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_0_win)
-        self.qtgui_number_sink_0_0 = qtgui.number_sink(
-            gr.sizeof_char,
-            0,
-            qtgui.NUM_GRAPH_HORIZ,
-            1,
-            None # parent
-        )
-        self.qtgui_number_sink_0_0.set_update_time(0.10)
-        self.qtgui_number_sink_0_0.set_title("")
-
-        labels = ['', '', '', '', '',
-            '', '', '', '', '']
-        units = ['', '', '', '', '',
-            '', '', '', '', '']
-        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
-            ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-
-        for i in range(1):
-            self.qtgui_number_sink_0_0.set_min(i, -1)
-            self.qtgui_number_sink_0_0.set_max(i, 1)
-            self.qtgui_number_sink_0_0.set_color(i, colors[i][0], colors[i][1])
-            if len(labels[i]) == 0:
-                self.qtgui_number_sink_0_0.set_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_number_sink_0_0.set_label(i, labels[i])
-            self.qtgui_number_sink_0_0.set_unit(i, units[i])
-            self.qtgui_number_sink_0_0.set_factor(i, factor[i])
-
-        self.qtgui_number_sink_0_0.enable_autoscale(False)
-        self._qtgui_number_sink_0_0_win = sip.wrapinstance(self.qtgui_number_sink_0_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_0_win)
         self.qtgui_number_sink_0 = qtgui.number_sink(
             gr.sizeof_float,
             0,
@@ -167,7 +140,7 @@ class BPSK_lab4(gr.top_block, Qt.QWidget):
             None # parent
         )
         self.qtgui_number_sink_0.set_update_time(0.10)
-        self.qtgui_number_sink_0.set_title("")
+        self.qtgui_number_sink_0.set_title("BER PSK")
 
         labels = ['', '', '', '', '',
             '', '', '', '', '']
@@ -233,27 +206,18 @@ class BPSK_lab4(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_const_sink_x_0_0_win)
-        self._noise_volt_range = qtgui.Range(0, 1, 0.01, 0.01, 200)
-        self._noise_volt_win = qtgui.RangeWidget(self._noise_volt_range, self.set_noise_volt, "Channel: Noise Voltage", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_grid_layout.addWidget(self._noise_volt_win, 0, 0, 1, 1)
-        for r in range(0, 1):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
         self.fec_ber_bf_0 = fec.ber_bf(False, 1, -7.0)
         self.fec_ber_bf_0.set_block_alias("BER")
         self.digital_constellation_decoder_cb_0_0 = digital.constellation_decoder_cb(const_0)
-        self.digital_chunks_to_symbols_xx_0_0 = digital.chunks_to_symbols_bc(BPSK, 1)
+        self.digital_chunks_to_symbols_xx_0_0 = digital.chunks_to_symbols_bc(const_0.points(), 1)
         self.blocks_throttle2_0_0_0 = blocks.throttle( gr.sizeof_char*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
         self.blocks_throttle2_0_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*1, 'D:\\Comunicaciones_Digitales_Labs\\Laboratorio_4\\BER_BPSK.csv', False)
-        self.blocks_file_sink_0.set_unbuffered(True)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.blocks_add_xx_0_0 = blocks.add_vcc(1)
         self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, 1000, 1, 0, 0)
         self.analog_random_source_x_0 = blocks.vector_source_b(list(map(int, numpy.random.randint(0, 2, 32000))), True)
-        self.analog_noise_source_x_0_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 0.2, 0)
+        self.analog_noise_source_x_0_0 = analog.noise_source_c(analog.GR_GAUSSIAN, noise_volt, 0)
 
 
         ##################################################
@@ -272,8 +236,6 @@ class BPSK_lab4(gr.top_block, Qt.QWidget):
         self.connect((self.digital_chunks_to_symbols_xx_0_0, 0), (self.blocks_add_xx_0_0, 0))
         self.connect((self.digital_chunks_to_symbols_xx_0_0, 0), (self.blocks_complex_to_real_0, 0))
         self.connect((self.digital_constellation_decoder_cb_0_0, 0), (self.fec_ber_bf_0, 1))
-        self.connect((self.digital_constellation_decoder_cb_0_0, 0), (self.qtgui_number_sink_0_0, 0))
-        self.connect((self.fec_ber_bf_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.fec_ber_bf_0, 0), (self.qtgui_number_sink_0, 0))
 
 
@@ -306,6 +268,7 @@ class BPSK_lab4(gr.top_block, Qt.QWidget):
 
     def set_noise_volt(self, noise_volt):
         self.noise_volt = noise_volt
+        self.analog_noise_source_x_0_0.set_amplitude(self.noise_volt)
 
     def get_const_0(self):
         return self.const_0
@@ -313,13 +276,6 @@ class BPSK_lab4(gr.top_block, Qt.QWidget):
     def set_const_0(self, const_0):
         self.const_0 = const_0
         self.digital_constellation_decoder_cb_0_0.set_constellation(self.const_0)
-
-    def get_BPSK(self):
-        return self.BPSK
-
-    def set_BPSK(self, BPSK):
-        self.BPSK = BPSK
-        self.digital_chunks_to_symbols_xx_0_0.set_symbol_table(self.BPSK)
 
 
 
